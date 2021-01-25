@@ -1,0 +1,36 @@
+{
+  "name": "tailwind-to-lit",
+  "version": "0.0.1",
+  "description": "A program to create Tailwind styles for LitElement (Creating css-in-js)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielkoek/tailwind-to-lit.git"
+  },
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "lit",
+    "lit-element",
+    "lit-html"
+  ],
+  "bin": {
+    "tailwind-to-lit": "./tailwind-to-lit.mjs",
+    "minify-lit": "./minify-lit.mjs"
+  },
+  "author": "Daniël Koek",
+  "license": "ISC",
+  "dependencies": {
+    "@fullhuman/postcss-purgecss": "^4.0.0",
+    "autoprefixer": "^10.2.3",
+    "cssnano": "^4.1.10",
+    "fs": "0.0.1-security",
+    "minify-html-literals": "^1.3.2",
+    "postcss": "^8.2.4",
+    "tailwindcss": "^2.0.2",
+    "terser": "^5.5.1"
+  }
+}
