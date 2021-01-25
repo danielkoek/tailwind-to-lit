@@ -30,10 +30,10 @@ import tailwindcss from "tailwindcss";
 const prod = process.argv.slice(2)[0] === "prod";
 const devPlugins = [tailwindcss, autoprefixer, nano];
 import purgecss from "@fullhuman/postcss-purgecss";
-const purge = filter =>
+const purge = (filter) =>
   purgecss({
     content: filter,
-    defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g),
+    defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g),
   });
 
 fs.readFile(baseCss, (err, css) => {
@@ -45,7 +45,7 @@ fs.readFile(baseCss, (err, css) => {
 
   const prodPlugins = [...devPlugins, purge(purgeFilter)];
   if (prod) console.log(`PROD MODE`);
-  fs.unlink(jsBuild, err => {
+  fs.unlink(jsBuild, (err) => {
     if (err && err.code == "ENOENT") {
       // file doens't exist
       console.info("File doesn't exist, won't remove it.");
@@ -57,11 +57,11 @@ fs.readFile(baseCss, (err, css) => {
   const plugins = prod ? prodPlugins : devPlugins;
   postcss(plugins)
     .process(css, { from: baseCss, to: jsBuild })
-    .then(result => {
+    .then((result) => {
       const css = result.css.replace(/\\/g, "");
-      fs.writeFile(cssBuild, css, err => callbackWrite(err, cssBuild));
+      fs.writeFile(cssBuild, css, (err) => callbackWrite(err, cssBuild));
       const jsTemplate =
         `import { css } from "lit-element";` + `export default css\`${css}\`;`;
-      fs.writeFile(jsBuild, jsTemplate, err => callbackWrite(err, jsBuild));
+      fs.writeFile(jsBuild, jsTemplate, (err) => callbackWrite(err, jsBuild));
     });
 });
