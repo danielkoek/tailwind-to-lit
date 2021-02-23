@@ -1,6 +1,6 @@
 {
   "name": "tailwind-to-lit",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A program to create Tailwind styles for LitElement (Creating css-in-js)",
   "main": "index.js",
   "scripts": {
