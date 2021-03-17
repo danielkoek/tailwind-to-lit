@@ -1,50 +1,43 @@
 # tailwind-to-lit
 
-Super basic Tailwind to Lit
+Super basic Tailwind to Lit using snowpack plugin
 
 ## Installation
 
 ```bash
-npm install -d tailwind-to-lit
+npm install -d lit-html tailwindcss snowpack @tailwindcss/jit postcss cssnano autoprefixer tailwind-to-lit
 ```
 
 in the package.json add the following:
 
 ```json
 "scripts": { 
-    "build-dev": "tailwind-to-lit",
-    "build": "tailwind-to-lit prod",
-    "minify":"minify-lit",
+    "start": "snowpack dev",
+    "build": "snowpack build"
   },
 ```
 
 ```bash
-npm run build-dev
+npm start
 ```
 
-Will produce a full fledged js file (make sure you created the folder structure first)
+Will start a dev server with everthing you need
 
 ```bash
 npm run build
 ```
 
-Will create a build version, it will check all your js files and html files in the src folder and purge any css class names that are not used in the final tailwind.js file
+Will create a build version
 
-Last but not least:
-
-```bash
-npm run minify
-```
-
-Will look at the `./build/` folder and will minify any js,css or html file.
 
 ## How to use
 
 Create the following files:
 
 - src/css/tailwind.css
-- src/js/Style/tailwind.js <- this one will be overridden
 - tailwind.config.js
+- snowpack.config.js
+- postcss.config.js
   
 ## tailwind.css
 
@@ -63,7 +56,7 @@ Since the separator of tailwinds, which is `:`  is not valid css, we have to cha
 ```js
 module.exports = {
   separator: "_",
-  purge: [],
+  purge: ["./src/**/*.js", "**/*.html"],
   theme: {
     extend: {
       spacing: {
@@ -99,15 +92,36 @@ module.exports = {
 }
 ```
 
-### Things to understand
+## snowpack.config.js
 
-The reason the minifier will look in the `./build/` is because you need to build the code, with building it is nothing more then node resolving, with something like Snowpack or similar tool. Snowpack is the tool of chose that I usually use for dev and build, if you want to use this too the only thing you have to change is to change the package.json
+```js
+module.exports = {
+  mount: { src: "/" },
+  routes: [{ match: "routes", src: ".*", dest: "/index.html" }],
+  devOptions: { port: 443, secure: true },
+  plugins: ["tailwind-to-lit"],
+};
 
-```json
-"scripts": { 
-   "start": "tailwind-to-lit && snowpack dev",
-    "build": "tailwind-to-lit prod && snowpack build && minify-lit",
-}
 ```
 
-And mount the `src` folder in the snowpack config. This will work exceptional well on modern browsers since they can fetch multiple resource concurrently, and makes your code super easy to debug, even in production (though the minify might change some of the variable names).
+## postcss.config.js
+
+```js
+module.exports = {
+  plugins: {
+    "@tailwindcss/jit": {},
+    autoprefixer: {},
+    cssnano: {
+      preset: [
+        "default",
+        {
+          discardComments: {
+            removeAll: true,
+          },
+        },
+      ],
+    },
+  },
+};
+```
+
