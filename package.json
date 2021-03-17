@@ -12,6 +12,7 @@
   },
   "keywords": [
     "snowpack",
+    "snowpack-plugin",
     "tailwind",
     "tailwindcss",
     "lit",
@@ -30,5 +31,9 @@
   },
   "peerDependencies": {
     "postcss": "*"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/danielkoek/tailwind-to-lit/issues"
+  },
+  "homepage": "https://github.com/danielkoek/tailwind-to-lit#readme"
 }
