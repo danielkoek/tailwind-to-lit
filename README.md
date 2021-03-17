@@ -29,7 +29,6 @@ npm run build
 
 Will create a build version
 
-
 ## How to use
 
 Create the following files:
@@ -124,4 +123,3 @@ module.exports = {
   },
 };
 ```
-
