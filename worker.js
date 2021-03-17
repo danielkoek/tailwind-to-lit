@@ -6,7 +6,7 @@ const postcssrc = require("postcss-load-config");
 
 let process = null;
 
-async function transformAsync(content) {
+async function transformAsync(content, filePath) {
   if (!process) {
     const { plugins, rcOptions } = await postcssrc({});
     const processor = postcss(plugins);

@@ -5,7 +5,8 @@ Super basic Tailwind to Lit using snowpack plugin
 ## Installation
 
 ```bash
-npm install -d lit-html tailwindcss snowpack @tailwindcss/jit postcss cssnano autoprefixer tailwind-to-lit
+npm install -D tailwindcss snowpack @tailwindcss/jit postcss cssnano autoprefixer tailwind-to-lit
+npm install lit-element
 ```
 
 in the package.json add the following:

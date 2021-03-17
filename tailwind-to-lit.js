@@ -17,7 +17,7 @@ module.exports = (snowpackConfig, pluginOptions) => {
       const content = await fs.readFile(filePath, "utf-8");
 
       if (content) {
-        const encodedResult = await worker.transformAsync(content);
+        const encodedResult = await worker.transformAsync(content, filePath);
         const { css } = JSON.parse(encodedResult);
         return {
           ".js": cssResultModule(css),
