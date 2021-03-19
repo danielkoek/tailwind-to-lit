@@ -34,12 +34,12 @@ Will create a build version
 
 Create the following files:
 
-- src/css/tailwind.css
+- src/css/tailwind.tail
 - tailwind.config.js
 - snowpack.config.js
 - postcss.config.js
   
-## tailwind.css
+## tailwind.tail
 
 Can be left like the tutorial EG:
 
