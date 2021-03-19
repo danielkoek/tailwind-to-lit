@@ -1,6 +1,6 @@
 {
   "name": "tailwind-to-lit",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A snowpack plugin to create Tailwind styles for LitElement (Creating css-in-js)",
   "main": "tailwind-to-lit.js",
   "scripts": {
