@@ -14,7 +14,7 @@ let worker, pool;
 module.exports = (snowpackConfig, pluginOptions) => {
   return {
     name: "tailwind-to-lit",
-    resolve: { input: [".tail", ".css"], output: [".js", ".css"] },
+    resolve: { input: [".tail"], output: [".js", ".css"] },
     async load({ filePath, isDev }) {
       pool = pool || workerpool.pool(require.resolve("./worker.js"));
       worker = worker || (await pool.proxy());
