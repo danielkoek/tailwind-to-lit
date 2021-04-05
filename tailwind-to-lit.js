@@ -36,7 +36,7 @@ module.exports = (snowpackConfig, pluginOptions) => {
     async load({ filePath }) {
       pool = pool || workerpool.pool(require.resolve("./worker.js"));
       worker = worker || (await pool.proxy());
-      tailwindFiles.push(filePath);
+      if (tailwindFiles.indexOf(filePath) === -1) tailwindFiles.push(filePath);
       const content = await fs.readFile(filePath, "utf-8");
       if (content) {
         const encodedResult = await worker.transformAsync(content, filePath);
