@@ -9,15 +9,19 @@ const proxyImportResolver = (source) => {
 const cssResultModule = (cssText) =>
   `import { css } from "lit-element";` +
   `export default css\`${cssText.replace(/\\/g, "")}\`;`;
-
+let tailwindFiles = [];
 let worker, pool;
 module.exports = (snowpackConfig, pluginOptions) => {
   return {
     name: "tailwind-to-lit",
     resolve: { input: [".tail"], output: [".js", ".css"] },
-    async load({ filePath, isDev }) {
+    onChange({ filePath }) {
+      tailwindFiles.forEach((x) => this.markChanged(x));
+    },
+    async load({ filePath }) {
       pool = pool || workerpool.pool(require.resolve("./worker.js"));
       worker = worker || (await pool.proxy());
+      tailwindFiles.push(filePath);
       const content = await fs.readFile(filePath, "utf-8");
       if (content) {
         const encodedResult = await worker.transformAsync(content, filePath);
