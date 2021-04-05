@@ -2,6 +2,11 @@
 const fs = require("fs").promises;
 const fsSync = require("fs");
 const workerpool = require("workerpool");
+const path = require("path");
+const micromatch = require("micromatch");
+const tailwindConfig = require("tailwindcss/resolveConfig")(
+  require(path.join(process.cwd(), "/tailwind.config.js"))
+);
 const glob = require("glob");
 const proxyImportResolver = (source) => {
   return source.replace(/(?:import)\s*['"].*\.\w+\.css\.js['"];/g, "");
@@ -16,6 +21,16 @@ module.exports = (snowpackConfig, pluginOptions) => {
     name: "tailwind-to-lit",
     resolve: { input: [".tail"], output: [".js", ".css"] },
     onChange({ filePath }) {
+      let relativePath = path.relative(process.cwd(), filePath);
+
+      if (
+        !micromatch.isMatch(
+          relativePath,
+          tailwindConfig.purge.content ?? tailwindConfig.purge
+        )
+      ) {
+        return;
+      }
       tailwindFiles.forEach((x) => this.markChanged(x));
     },
     async load({ filePath }) {
