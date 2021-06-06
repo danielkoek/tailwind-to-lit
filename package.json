@@ -1,6 +1,6 @@
 {
   "name": "tailwind-to-lit",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "A snowpack plugin to create Tailwind styles for LitElement (Creating css-in-js)",
   "main": "tailwind-to-lit.js",
   "scripts": {
@@ -23,10 +23,10 @@
   "license": "ISC",
   "dependencies": {
     "fs": "0.0.1-security",
-    "micromatch": "^4.0.2",
+    "micromatch": "^4.0.4",
     "path": "^0.12.7",
     "postcss-load-config": "^3.0.1",
-    "workerpool": "^6.1.2"
+    "workerpool": "^6.1.4"
   },
   "devDependencies": {
     "postcss": "^8.2.4"
