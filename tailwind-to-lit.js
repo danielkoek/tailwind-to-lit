@@ -12,7 +12,7 @@ const proxyImportResolver = (source) => {
   return source.replace(/(?:import)\s*['"].*\.\w+\.css\.js['"];/g, "");
 };
 const cssResultModule = (cssText) =>
-  `import { css } from "lit-element";` +
+  `import { css } from "lit";` +
   `export default css\`${cssText.replace(/\\/g, "")}\`;`;
 let tailwindFiles = [];
 let worker, pool;
